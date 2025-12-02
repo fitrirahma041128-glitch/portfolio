@@ -12,8 +12,9 @@
     :root {
       --blue-main: #1a73e8;
       --blue-dark: #0f4fb8;
+      --blue-soft: #e7f1ff;
       --bg-light: #f4f8ff;
-      --text-dark: #222;
+      --text-dark: #1b2a4a;
     }
     body {
       font-family: 'Inter', sans-serif;
@@ -21,6 +22,8 @@
       background: var(--bg-light);
       color: var(--text-dark);
     }
+
+    /* HEADER */
     header {
       background: white;
       box-shadow: 0 2px 10px rgba(0,0,0,0.05);
@@ -28,11 +31,19 @@
       top: 0;
       z-index: 10;
     }
+    .header-inner {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+    }
     .brand {
       font-weight: 700;
       color: var(--blue-main);
       text-decoration: none;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
     }
     nav ul {
       list-style: none;
@@ -43,19 +54,21 @@
       text-decoration: none;
       color: var(--text-dark);
       font-weight: 600;
+      transition: .2s;
     }
     nav a:hover {
       color: var(--blue-main);
     }
 
-    /* HERO SECTION */
+    /* HERO */
     #hero {
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: center;
-      padding: 60px 10%;
+      padding: 70px 10%;
       background: linear-gradient(135deg, var(--blue-main), var(--blue-dark));
       color: white;
+      gap: 40px;
     }
     #hero img {
       width: 330px;
@@ -75,9 +88,8 @@
     .ghost { border: 2px solid white; color: white; }
     .ghost:hover { background: white; color: var(--blue-main); }
 
-    /* SECTION BASIC */
-    section { padding: 60px 10%; }
-    h2 { color: var(--blue-dark); }
+    section { padding: 70px 10%; max-width: 1200px; margin: auto; }
+    h2 { color: var(--blue-dark); margin-bottom: 20px; }
 
     /* ABOUT */
     .about-grid {
@@ -92,9 +104,10 @@
       text-align: center;
       border-left: 5px solid var(--blue-main);
       box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      margin-bottom: 15px;
     }
 
-    /* EDUCATION FIXED */
+    /* EDUCATION */
     .edu-item {
       background: white;
       padding: 20px;
@@ -102,6 +115,20 @@
       margin-bottom: 15px;
       border-left: 5px solid var(--blue-main);
       box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap: 20px;
+    }
+    .skill-box {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      border-left: 5px solid var(--blue-main);
     }
 
     /* PORTFOLIO */
@@ -117,8 +144,17 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.07);
       transition: 0.3s;
     }
-    .project:hover {
-      transform: translateY(-5px);
+    .project:hover { transform: translateY(-5px); }
+    .project img { width: 100%; }
+
+    /* CONTACT */
+    .contact-box {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+      border-left: 5px solid var(--blue-main);
+      max-width: 500px;
     }
 
     /* FOOTER */
@@ -134,26 +170,27 @@
 <body>
 
 <header>
-  <div class="container header-inner" style="display:flex; justify-content:space-between; align-items:center; padding:15px 10%;">
+  <div class="header-inner">
     <a class="brand" href="#hero">Fitri Rahmawati</a>
     <nav>
       <ul>
+        <li><a href="#hero">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#education">Education</a></li>
         <li><a href="#skills">Skills</a></li>
-        <li><a href="#portfolio">Portofolio</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
-<!-- ================= HERO ================ -->
+<!-- HERO -->
 <section id="hero">
   <div>
     <h1>Fitri Rahmawati</h1>
     <p>Mahasiswi Sistem Informasi — UNIVERSITAS KOMPUTAMA</p>
-    <p>Fokus pada UI/UX, pengembangan web, dan analisis data. Siap berkarya dan berkolaborasi!</p>
+    <p>Fokus pada UI/UX, pengembangan web, dan analisis data.</p>
     <div style="margin-top:20px; display:flex; gap:15px;">
       <a class="btn primary" href="assets/Fitri_Rahmawati_CV.pdf" download>Download CV</a>
       <a class="btn ghost" href="#contact">Contact Me</a>
@@ -169,7 +206,7 @@
   <h2>About Me</h2>
   <div class="about-grid">
     <div>
-      <p>Halo! Saya Fitri Rahmawati, mahasiswi Sistem Informasi UNIVERSITAS KOMPUTAMA (Angkatan 2023). Tertarik dalam desain UI/UX, pengembangan web, dan eksplorasi solusi digital.</p>
+      <p>Halo! Saya Fitri Rahmawati, mahasiswi Sistem Informasi UNIVERSITAS KOMPUTAMA.</p>
       <ul>
         <li><strong>Lokasi:</strong> Indonesia</li>
         <li><strong>Email:</strong> fitri@example.com</li>
@@ -177,38 +214,55 @@
       </ul>
     </div>
     <div>
-      <div class="stat">
-        <h3>2023</h3>
-        <p>Angkatan</p>
-      </div>
-      <div class="stat">
-        <h3>Sistem Informasi</h3>
-        <p>Jurusan</p>
-      </div>
-      <div class="stat">
-        <h3>UNIVERSITAS KOMPUTAMA</h3>
-        <p>Institusi</p>
-      </div>
+      <div class="stat"><h3>2023</h3><p>Angkatan</p></div>
+      <div class="stat"><h3>Sistem Informasi</h3><p>Jurusan</p></div>
+      <div class="stat"><h3>UNIVERSITAS KOMPUTAMA</h3><p>Institusi</p></div>
     </div>
   </div>
 </section>
 
-<!-- EDUCATION FIXED TAG ERRORS -->
+<!-- EDUCATION -->
 <section id="education">
   <h2>Education</h2>
   <div class="edu-item">
     <h3>UNIVERSITAS KOMPUTAMA</h3>
-    <p class="muted">S1 — Sistem Informasi (2023–Sekarang)</p>
-    <p>Fokus pada pengembangan sistem, basis data, dan analisis informasi.</p>
+    <p>S1 — Sistem Informasi (2023–Sekarang)</p>
   </div>
-
   <div class="edu-item">
     <h3>SMK TUNAS BANGSA WANAREJA</h3>
-    <p class="muted">Akuntansi Keuangan Lembaga (2020)</p>
+    <p>Akuntansi Keuangan Lembaga (2020)</p>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- SKILLS -->
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-box"><h3>UI/UX Design</h3><p>Figma, Wireframe, Prototyping</p></div>
+    <div class="skill-box"><h3>Frontend</h3><p>HTML, CSS, JavaScript</p></div>
+    <div class="skill-box"><h3>Data Analysis</h3><p>Spreadsheet, SQL dasar</p></div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <h2>Portfolio</h2>
+  <div class="portfolio-grid">
+    <div class="project"><img src="img/p1.jpg"><div style="padding:15px;"><h3>Project 1</h3><p>Deskripsi singkat...</p></div></div>
+    <div class="project"><img src="img/p2.jpg"><div style="padding:15px;"><h3>Project 2</h3><p>Deskripsi singkat...</p></div></div>
+    <div class="project"><img src="img/p3.jpg"><div style="padding:15px;"><h3>Project 3</h3><p>Deskripsi singkat...</p></div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Contact</h2>
+  <div class="contact-box">
+    <p><strong>Email:</strong> fitri@example.com</p>
+    <p><strong>WhatsApp:</strong> +62 8xx-xxxx-xxxx</p>
+  </div>
+</section>
+
 <footer>
   <p>© 2025 Fitri Rahmawati — UNIVERSITAS KOMPUTAMA</p>
 </footer>
