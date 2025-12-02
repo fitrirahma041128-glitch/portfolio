@@ -1,271 +1,161 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Fitri Rahmawati — Resume</title>
-  <meta name="description" content="Resume Fitri Rahmawati — Mahasiswi UNIVERSITAS KOMPUTAMA, Sistem Informasi (Angkatan 2023)" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portofolio — Zulfa Fikri Fazzaldy</title>
+  <meta name="description" content="Portofolio Zulfa Fikri Fazzaldy — Mahasiswa Sistem Informasi. Profil, skill, pengalaman, proyek, layanan, dan kontak." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --blue-main: #1a73e8;
-      --blue-dark: #0f4fb8;
-      --blue-soft: #e7f1ff;
-      --bg-light: #f4f8ff;
-      --text-dark: #1b2a4a;
-    }
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      background: var(--bg-light);
-      color: var(--text-dark);
-    }
-
-    /* HEADER */
-    header {
-      background: white;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    .header-inner {
-      max-width: 1200px;
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px;
-    }
-    .brand {
-      font-weight: 700;
-      color: var(--blue-main);
-      text-decoration: none;
-      font-size: 1.4rem;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-    }
-    nav a {
-      text-decoration: none;
-      color: var(--text-dark);
-      font-weight: 600;
-      transition: .2s;
-    }
-    nav a:hover {
-      color: var(--blue-main);
-    }
-
-    /* HERO */
-    #hero {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      padding: 70px 10%;
-      background: linear-gradient(135deg, var(--blue-main), var(--blue-dark));
-      color: white;
-      gap: 40px;
-    }
-    #hero img {
-      width: 330px;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    }
-    .btn {
-      padding: 12px 22px;
-      border-radius: 8px;
-      font-weight: 600;
-      text-decoration: none;
-      display: inline-block;
-      transition: 0.3s;
-    }
-    .primary { background: white; color: var(--blue-main); }
-    .primary:hover { background: #e6ecff; }
-    .ghost { border: 2px solid white; color: white; }
-    .ghost:hover { background: white; color: var(--blue-main); }
-
-    section { padding: 70px 10%; max-width: 1200px; margin: auto; }
-    h2 { color: var(--blue-dark); margin-bottom: 20px; }
-
-    /* ABOUT */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 30px;
-    }
-    .stat {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      border-left: 5px solid var(--blue-main);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      margin-bottom: 15px;
-    }
-
-    /* EDUCATION */
-    .edu-item {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 15px;
-      border-left: 5px solid var(--blue-main);
-      box-shadow: 0 5px 12px rgba(0,0,0,0.05);
-    }
-
-    /* SKILLS */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-      gap: 20px;
-    }
-    .skill-box {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      border-left: 5px solid var(--blue-main);
-    }
-
-    /* PORTFOLIO */
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-      gap: 20px;
-    }
-    .project {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.07);
-      transition: 0.3s;
-    }
-    .project:hover { transform: translateY(-5px); }
-    .project img { width: 100%; }
-
-    /* CONTACT */
-    .contact-box {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.07);
-      border-left: 5px solid var(--blue-main);
-      max-width: 500px;
-    }
-
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 25px;
-      background: var(--blue-dark);
-      color: white;
-      margin-top: 30px;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id="particles-js"></div>
 
-<header>
-  <div class="header-inner">
-    <a class="brand" href="#hero">Fitri Rahmawati</a>
-    <nav>
-      <ul>
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+  <div class="container">
+    <nav class="navbar">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#projects" class="nav-link">Proyek</a>
+      <a href="#contact" class="nav-link">Kontak</a>
     </nav>
-  </div>
-</header>
 
-<!-- HERO -->
-<section id="hero">
-  <div>
-    <h1>Fitri Rahmawati</h1>
-    <p>Mahasiswi Sistem Informasi — UNIVERSITAS KOMPUTAMA</p>
-    <p>Fokus pada UI/UX, pengembangan web, dan analisis data.</p>
-    <div style="margin-top:20px; display:flex; gap:15px;">
-      <a class="btn primary" href="assets/Fitri_Rahmawati_CV.pdf" download>Download CV</a>
-      <a class="btn ghost" href="#contact">Contact Me</a>
-    </div>
-  </div>
-  <div style="text-align:center;">
-    <img src="img/fittri.foto.jpg" alt="Foto Fitri Rahmawati">
-  </div>
-</section>
+    <header id="home" class="header-section">
+      <div class="photo">
+        <img src="WhatsApp Image 2025-11-25 at 01.01.51.jpeg" alt="Foto Zulfa Fikri Fazzaldy">
+      </div>
+      <div class="intro">
+        <h1 id="typing">Halo, Saya Zulfa Fikri Fazzaldy</h1>
+        <div class="role">Mahasiswa Sistem Informasi • Web & UI Enthusiast</div>
+        <p class="small-muted">
+          Halo! Saya Zulfa, saya adalah seorang mahasiswa Program Studi Sistem Informasi di Universitas Komputama. Saya memiliki minat yang kuat dalam bidang teknologi informasi, khususnya pada pengembangan sistem dan pemanfaatan teknologi untuk meningkatkan efisiensi serta efektivitas proses kerja. Selama menempuh pendidikan, saya terbiasa mempelajari pemrograman, analisis sistem, basis data, dan pengembangan aplikasi berbasis web.
+        </p>
+        <div class="cta">
+          <a class="btn" href="#projects">Lihat Proyek</a>
+          <a class="btn primary" href="#contact">Hubungi Saya</a>
+        </div>
+      </div>
+    </header>
 
-<!-- ABOUT -->
-<section id="about">
-  <h2>About Me</h2>
-  <div class="about-grid">
-    <div>
-      <p>Halo! Saya Fitri Rahmawati, mahasiswi Sistem Informasi UNIVERSITAS KOMPUTAMA.</p>
-      <ul>
-        <li><strong>Lokasi:</strong> Indonesia</li>
-        <li><strong>Email:</strong> fitri@example.com</li>
-        <li><strong>Handphone:</strong> +62 8xx-xxxx-xxxx</li>
-      </ul>
-    </div>
-    <div>
-      <div class="stat"><h3>2023</h3><p>Angkatan</p></div>
-      <div class="stat"><h3>Sistem Informasi</h3><p>Jurusan</p></div>
-      <div class="stat"><h3>UNIVERSITAS KOMPUTAMA</h3><p>Institusi</p></div>
-    </div>
-  </div>
-</section>
+    <main>
+      <section class="card about">
+        <h3>Profil Singkat</h3>
+        <p>Nama: <strong>Zulfa Fikri Fazzaldy</strong> ~ Lahir: Brebes, 29 Juni 2004 ~ Alamat: Karanggintung rt 3/4, Gandrungmangu, Cilacap, Jawa Tengah, Indonesia ~ Kelamin: Laki-laki</p>
+        <p>Saya adalah mahasiswa sistem informasi yang gemar membuat antarmuka yang bersih dan fungsional. Fokus saya pada pengembangan front-end, integrasi API sederhana, dan pembuatan prototype cepat untuk ide-ide aplikasi.</p>
+        <h4 style="margin-top:14px">Skill Utama</h4>
+        <div class="skills">
+          <div class="skill">HTML &amp; CSS</div>
+          <div class="skill">JavaScript (ES6+)</div>
+          <div class="skill">React (dasar)</div>
+          <div class="skill">UI/UX & Figma</div>
+          <div class="skill">Git & GitHub</div>
+          <div class="skill">Responsive Design</div>
+        </div>
+      </section>
 
-<!-- EDUCATION -->
-<section id="education">
-  <h2>Education</h2>
-  <div class="edu-item">
-    <h3>UNIVERSITAS KOMPUTAMA</h3>
-    <p>S1 — Sistem Informasi (2023–Sekarang)</p>
-  </div>
-  <div class="edu-item">
-    <h3>SMK TUNAS BANGSA WANAREJA</h3>
-    <p>Akuntansi Keuangan Lembaga (2020)</p>
-  </div>
-</section>
+      <section class="card experience" style="margin-top:16px">
+        <h3>Pengalaman</h3>
+        <div class="timeline">
+          <div class="item">
+            <h4>Staf IT — Indomaret (Magang)</h4>
+            <p class="small-muted">Menangani perbaikan sistem kasir sederhana, membantu setup jaringan toko, dan dokumentasi SOP — 3 bulan.</p>
+          </div>
+          <div class="item">
+            <h4>Anggota UKM Teknologi</h4>
+            <p class="small-muted">Berpartisipasi pada lomba pengembangan aplikasi internal kampus, mengelola versi dan presentasi produk.</p>
+          </div>
+        </div>
+      </section>
 
-<!-- SKILLS -->
-<section id="skills">
-  <h2>Skills</h2>
-  <div class="skills-grid">
-    <div class="skill-box"><h3>UI/UX Design</h3><p>Figma, Wireframe, Prototyping</p></div>
-    <div class="skill-box"><h3>Frontend</h3><p>HTML, CSS, JavaScript</p></div>
-    <div class="skill-box"><h3>Data Analysis</h3><p>Spreadsheet, SQL dasar</p></div>
+      <section id="projects" class="card" style="margin-top:16px">
+        <h3>Proyek Unggulan</h3>
+        <div class="projects">
+          <div class="project">
+            <h5>Website Toko Thrift (Responsif)</h5>
+            <p class="small-muted">Situs e-commerce sederhana untuk barang preloved, lengkap dengan halaman produk, kategori, dan fitur pesan via WhatsApp.</p>
+            <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+          </div>
+          <div class="project">
+            <h5>Sistem Booking Hotel (Prototype)</h5>
+            <p class="small-muted">Prototype web untuk booking kamar dengan tampilan dashboard user dan resepsionis (tanpa DB, demo JS).</p>
+            <div class="tags"><span class="tag">Prototype</span><span class="tag">Figma</span><span class="tag">Vanilla JS</span></div>
+          </div>
+          <div class="project">
+            <h5>Sistem Pendaftaran Lomba</h5>
+            <p class="small-muted">Form pendaftaran online, validasi client-side, dan export CSV untuk penyelenggara.</p>
+            <div class="tags"><span class="tag">Form</span><span class="tag">Validation</span><span class="tag">CSV</span></div>
+          </div>
+          <div class="project">
+            <h5>Dashboard Penjualan Sederhana</h5>
+            <p class="small-muted">Dashboard untuk usaha mikro kecil — laporan penjualan harian dan grafik ringkas.</p>
+            <div class="tags"><span class="tag">Chart</span><span class="tag">Data</span><span class="tag">UI</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" style="margin-top:16px">
+        <h3>Layanan</h3>
+        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;">
+          <div class="tag">Desain &amp; Implementasi Website</div>
+          <div class="tag">UI/UX Prototype</div>
+          <div class="tag">Pembuatan Form &amp; Sistem Pendaftaran</div>
+          <div class="tag">Konsultasi Teknologi Sederhana</div>
+        </div>
+      </section>
+    </main>
+
+    <aside>
+      <section id="contact" class="card" style="margin-top:16px">
+        <h3>Kontak &amp; Sosial</h3>
+        <div class="contact">
+          <div class="line">
+            <div style="flex:1">
+              <div class="small-muted">Email</div>
+              <div><a href="mailto:zulfaafdno@gmail.com">zulfaaffdno@gmail.com</a></div>
+            </div>
+          </div>
+          <div class="line">
+            <div style="flex:1">
+              <div class="small-muted">Telepon / WA</div>
+              <div><a href="https://wa.me/6281234567890" target="_blank">+62 812-3456-7890</a></div>
+            </div>
+          </div>
+          <div>
+            <div class="small-muted">Sosial Media</div>
+            <div class="socials" style="display:flex; flex-direction:column; gap:4px; margin-top:8px;">
+              <a href="https://instagram.com/pajja" target="_blank">Instagram : @pajja</a>
+              <a href="https://github.com/Zulfa" target="_blank">GitHub : Zulfafazzaldy</a>
+              <a href="https://linkedin.com/in/Zulfafikrifazzaldy" target="_blank">LinkedIn : ZulfaFikriFazzaldy</a>
+            </div>
+          </div>
+          <div style="margin-top:12px">
+            <div class="small-muted">Kirim Pesan</div>
+            <form id="contactForm" onsubmit="return handleContact(event)" style="display:flex; flex-direction:column; gap:8px; margin-top:8px;">
+              <div class="input"><input id="name" placeholder="Nama" required /></div>
+              <div class="input"><input id="email" placeholder="Email" type="email" required /></div>
+              <div class="input"><textarea id="message" placeholder="Pesan..." required></textarea></div>
+              <div style="display:flex; gap:8px;">
+                <button class="btn" type="reset">Reset</button>
+                <button class="btn primary" type="submit">Kirim</button>
+              </div>
+              <div id="formResult" class="small-muted" style="margin-top:6px;"></div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" style="margin-top:16px">
+        <h4>Info Cepat</h4>
+        <p class="small-muted">Lokasi: Indonesia • Status: Mahasiswa • Bahasa: Indonesia, Inggris (dasar)</p>
+      </section>
+    </aside>
+
+    <footer>
+      © <span id="year"></span> Zulfa Fikri Fazzaldy.
+    </footer>
   </div>
-</section>
 
-<!-- PORTFOLIO -->
-<section id="portfolio">
-  <h2>Portfolio</h2>
-  <div class="portfolio-grid">
-    <div class="project"><img src="img/p1.jpg"><div style="padding:15px;"><h3>Project 1</h3><p>Deskripsi singkat...</p></div></div>
-    <div class="project"><img src="img/p2.jpg"><div style="padding:15px;"><h3>Project 2</h3><p>Deskripsi singkat...</p></div></div>
-    <div class="project"><img src="img/p3.jpg"><div style="padding:15px;"><h3>Project 3</h3><p>Deskripsi singkat...</p></div></div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <h2>Contact</h2>
-  <div class="contact-box">
-    <p><strong>Email:</strong> fitri@example.com</p>
-    <p><strong>WhatsApp:</strong> +62 8xx-xxxx-xxxx</p>
-  </div>
-</section>
-
-<footer>
-  <p>© 2025 Fitri Rahmawati — UNIVERSITAS KOMPUTAMA</p>
-</footer>
-
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
