@@ -1,175 +1,232 @@
-// Basic interactivity: scroll reveal, skill animations, portfolio modal, filters, contact form submit handler
-document.addEventListener('DOMContentLoaded', () => {
-  // Set year in footer
-  document.getElementById('year').textContent = new Date().getFullYear();
+// ===== Neo-Interactive Script =====
+document.addEventListener("DOMContentLoaded", () => {
+  
+  /* -----------------------------------------------------
+   * 1. FOOTER YEAR
+  ----------------------------------------------------- */
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // Scroll reveal using IntersectionObserver
-  const reveals = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {threshold: 0.12});
-  reveals.forEach(r => obs.observe(r));
 
-  // Animate skill bars when skills section enters
-  const skillsSection = document.getElementById('skills');
-  if(skillsSection){
-    const skillsObserver = new IntersectionObserver((entries, observer) => {
+  /* -----------------------------------------------------
+   * 2. SCROLL REVEAL
+  ----------------------------------------------------- */
+  const reveals = document.querySelectorAll(".reveal");
+  const revealObserver = new IntersectionObserver(
+    (entries, obs) => {
       entries.forEach(entry => {
-        if(entry.isIntersecting){
-          document.querySelectorAll('.skill-bar').forEach(bar => {
-            const target = parseInt(bar.dataset.target || '0', 10);
-            const fill = bar.querySelector('.skill-fill');
-            const percentEl = bar.previousElementSibling?.querySelector('.skill-percent');
-            if(fill){
-              // animate width
-              fill.style.width = target + '%';
-              // animate percent number
-              if(percentEl){
-                let start = 0;
-                const duration = 900;
-                const stepTime = Math.max(10, Math.floor(duration / target));
-                const timer = setInterval(() => {
-                  start += 1;
-                  percentEl.textContent = start + '%';
-                  if(start >= target) clearInterval(timer);
-                }, stepTime);
-              }
-            }
-          });
-          observer.unobserve(entry.target);
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          obs.unobserve(entry.target);
         }
       });
-    }, {threshold:0.2});
-    skillsObserver.observe(skillsSection);
-  }
+    },
+    { threshold: 0.15 }
+  );
+  reveals.forEach(el => revealObserver.observe(el));
 
-  // Portfolio filters
-  const filterButtons = document.querySelectorAll('.filter-btn');
-  const projects = document.querySelectorAll('.project');
-  filterButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      projects.forEach(p => {
-        if(filter === 'all' || p.dataset.type === filter){
-          p.style.display = '';
-          // slight stagger reveal
-          p.style.opacity = 0;
-          setTimeout(()=> p.style.opacity = 1, 60);
-        } else {
-          p.style.display = 'none';
-        }
-      });
-    });
-  });
 
-  // Portfolio modal
-  const modal = document.getElementById('projectModal');
-  const modalImage = document.getElementById('modalImage');
-  const modalTitle = document.getElementById('modalTitle');
-  const modalDesc = document.getElementById('modalDesc');
-  const modalClose = document.querySelector('.modal-close');
+  /* -----------------------------------------------------
+   * 3. SKILL BAR ANIMATION (requestAnimationFrame)
+  ----------------------------------------------------- */
+  const skillsSection = document.getElementById("skills");
 
-  document.querySelectorAll('.view-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const img = btn.dataset.img;
-      const title = btn.dataset.title;
-      const desc = btn.dataset.desc;
-      openModal(img,title,desc);
-    });
-  });
-  // allow keyboard open via Enter on project articles
-  document.querySelectorAll('.project').forEach(p => {
-    p.addEventListener('keydown', (e) => {
-      if(e.key === 'Enter'){
-        const btn = p.querySelector('.view-btn');
-        if(btn) btn.click();
-      }
-    });
-  });
+  if (skillsSection) {
+    const skillObserver = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            document.querySelectorAll(".skill-bar").forEach(bar => {
+              const target = parseInt(bar.dataset.target || 0, 10);
+              const fill = bar.querySelector(".skill-fill");
+              const percentEl = bar.closest(".skill").querySelector(".skill-percent");
 
-  function openModal(img, title, desc){
-    modalImage.src = img;
-    modalImage.alt = title;
-    modalTitle.textContent = title;
-    modalDesc.textContent = desc;
-    modal.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeModal(){
-    modal.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-    modalImage.src = '';
-  }
-  modalClose.addEventListener('click', closeModal);
-  modal.addEventListener('click', (e) => {
-    if(e.target === modal) closeModal();
-  });
-  document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeModal();
-  });
+              if (!fill) return;
 
-  // Contact form submission (Formspree or similar)
-  const contactForm = document.getElementById('contactForm');
-  const formStatus = document.getElementById('formStatus');
-  if(contactForm){
-    contactForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      formStatus.textContent = 'Mengirim...';
-      const formData = new FormData(contactForm);
+              // Animate width
+              fill.style.width = target + "%";
 
-      // Use action attribute as endpoint
-      const action = contactForm.getAttribute('action');
-      try{
-        const resp = await fetch(action, {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
+              // Animate percentage (using rAF)
+              let current = 0;
+              const animatePercent = () => {
+                if (current <= target) {
+                  percentEl.textContent = current + "%";
+                  current++;
+                  requestAnimationFrame(animatePercent);
+                }
+              };
+              animatePercent();
+            });
+
+            obs.unobserve(entry.target);
           }
         });
-        if(resp.ok){
-          contactForm.reset();
-          formStatus.textContent = 'Terima kasih! Pesan telah terkirim.';
-        } else {
-          const data = await resp.json();
-          if(data?.errors){
-            formStatus.textContent = data.errors.map(e => e.message).join(', ');
-          } else {
-            formStatus.textContent = 'Terjadi masalah saat mengirim. Coba lagi nanti.';
-          }
-        }
-      } catch(err){
-        formStatus.textContent = 'Gagal mengirim. Periksa koneksi atau endpoint.';
-      }
-      setTimeout(()=> formStatus.textContent = '', 5000);
-    });
+      },
+      { threshold: 0.25 }
+    );
+
+    skillObserver.observe(skillsSection);
   }
 
-  // Small enhancement: smooth scroll for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', (e) => {
-      const href = a.getAttribute('href');
-      if(href.length > 1){
-        e.preventDefault();
-        const el = document.querySelector(href);
-        if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+
+  /* -----------------------------------------------------
+   * 4. PORTFOLIO FILTER
+  ----------------------------------------------------- */
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const projects = document.querySelectorAll(".project");
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      filterButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const filter = btn.dataset.filter;
+
+      let delay = 0;
+      projects.forEach(proj => {
+        if (filter === "all" || proj.dataset.type === filter) {
+          proj.style.display = "block";
+          proj.style.opacity = 0;
+
+          // stagger animation
+          setTimeout(() => {
+            proj.style.transition = "opacity .4s ease, transform .4s ease";
+            proj.style.opacity = 1;
+            proj.style.transform = "translateY(0)";
+          }, delay);
+
+          delay += 80;
+        } else {
+          proj.style.opacity = 0;
+          proj.style.transform = "translateY(20px)";
+          setTimeout(() => (proj.style.display = "none"), 300);
+        }
+      });
+    });
+  });
+
+
+  /* -----------------------------------------------------
+   * 5. MODAL PORTFOLIO
+  ----------------------------------------------------- */
+  const modal = document.getElementById("projectModal");
+  const modalImage = document.getElementById("modalImage");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalDesc = document.getElementById("modalDesc");
+  const modalClose = document.querySelector(".modal-close");
+
+  const openModal = (img, title, desc) => {
+    modalImage.src = img;
+    modalTitle.textContent = title;
+    modalDesc.textContent = desc;
+
+    modal.classList.add("show");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeModal = () => {
+    modal.classList.remove("show");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    setTimeout(() => (modalImage.src = ""), 300);
+  };
+
+  // Open via .view-btn
+  document.addEventListener("click", e => {
+    const btn = e.target.closest(".view-btn");
+    if (btn) {
+      openModal(btn.dataset.img, btn.dataset.title, btn.dataset.desc);
+    }
+  });
+
+  // Keyboard open when focus on project + Enter
+  document.querySelectorAll(".project").forEach(p => {
+    p.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        const btn = p.querySelector(".view-btn");
+        if (btn) btn.click();
       }
     });
   });
 
-  // Optional: download CV via JS to ensure cross-browser download if needed
-  const downloadBtn = document.getElementById('downloadCv');
-  if(downloadBtn){
-    downloadBtn.addEventListener('click', (e) => {
-      // Default anchor download will handle; this is a progressive enhancement if you want to fetch and download via blob.
-      // If providing a dynamic CV generation, implement fetch + blob here.
+  // Close events
+  modalClose?.addEventListener("click", closeModal);
+  modal.addEventListener("click", e => {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && modal.classList.contains("show")) {
+      closeModal();
+    }
+  });
+
+
+  /* -----------------------------------------------------
+   * 6. CONTACT FORM SUBMISSION
+  ----------------------------------------------------- */
+  const contactForm = document.getElementById("contactForm");
+  const formStatus = document.getElementById("formStatus");
+
+  if (contactForm) {
+    contactForm.addEventListener("submit", async e => {
+      e.preventDefault();
+
+      formStatus.textContent = "Mengirim...";
+      formStatus.style.color = "var(--primary)";
+
+      const formData = new FormData(contactForm);
+
+      try {
+        const endpoint = contactForm.getAttribute("action");
+        const resp = await fetch(endpoint, {
+          method: "POST",
+          body: formData,
+          headers: { Accept: "application/json" }
+        });
+
+        if (resp.ok) {
+          contactForm.reset();
+          formStatus.textContent = "✓ Pesan berhasil dikirim!";
+          formStatus.style.color = "var(--accent)";
+        } else {
+          formStatus.textContent = "❗ Gagal mengirim. Coba lagi.";
+          formStatus.style.color = "crimson";
+        }
+      } catch (err) {
+        formStatus.textContent = "⚠ Tidak ada koneksi ke server.";
+        formStatus.style.color = "crimson";
+      }
+
+      setTimeout(() => (formStatus.textContent = ""), 4500);
+    });
+  }
+
+
+  /* -----------------------------------------------------
+   * 7. SMOOTH SCROLL
+  ----------------------------------------------------- */
+  document.addEventListener("click", e => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+
+    const target = link.getAttribute("href");
+    if (target.length > 1) {
+      e.preventDefault();
+      const el = document.querySelector(target);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+
+
+  /* -----------------------------------------------------
+   * 8. DOWNLOAD CV (Optional Enhancement)
+  ----------------------------------------------------- */
+  const downloadBtn = document.getElementById("downloadCv");
+  if (downloadBtn) {
+    downloadBtn.addEventListener("click", () => {
+      // Bisa dibuat fetch+blob jika butuh versi dinamis.
+      // Kosongkan bila tidak perlu.
     });
   }
 });
